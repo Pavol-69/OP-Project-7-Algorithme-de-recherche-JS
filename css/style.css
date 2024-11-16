@@ -1,0 +1,69 @@
+* {
+  /*Couleurs*/
+  --prm: #ffd15b;
+  --wht: #ffffff;
+  --gry: #ededed;
+  --blk: #1b1b1b;
+}
+
+body {
+  /*Dimensions*/
+  margin: 0;
+
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+
+  /*Style*/
+  background-color: var(--gry);
+
+  /*Texte*/
+  font-family: "Manrope";
+}
+
+ul {
+  /*Style*/
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#main_ctn {
+  /*Dimensions*/
+  max-width: 1440px;
+  width: 100%;
+}
+
+.loupe_ctn {
+  /*Position*/
+  position: relative;
+}
+
+.loupe_ctn .loupe_circle {
+  /*Position*/
+  position: absolute;
+
+  /*Dimensions*/
+  width: 70%;
+  height: 70%;
+
+  /*Style*/
+  border: solid 1px;
+  border-radius: 50%;
+}
+
+.loupe_ctn .loupe_line {
+  /*Position*/
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  transform: rotate(-45deg);
+  transform-origin: bottom right;
+
+  /*Dimensions*/
+  width: 41%;
+  height: 41%;
+
+  /*Style*/
+  border-right: solid 1px;
+}

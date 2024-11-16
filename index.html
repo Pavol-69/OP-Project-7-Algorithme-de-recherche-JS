@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/components/header.css" rel="stylesheet" type="text/css" />
+    <link href="css/components/filtre.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Shrikhand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Shrikhand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <div id="main_ctn">
+      <header>
+        <img alt="Bandeau site" src="./assets/header/bandeau.jpg" />
+        <div class="shadow"></div>
+        <div id="logo_ctn">
+          <span>LES PETITS PLATS</span>
+          <div id="circle_ctn">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+          </div>
+        </div>
+
+        <form class="search_ctn">
+          <label>
+            CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET
+            DELICIEUSES
+          </label>
+          <input
+            id="search_bar"
+            placeholder="Rechercher une recette, un ingrédient, ..."
+          />
+          <button class="search_btn">
+            <div class="loupe_ctn">
+              <div class="loupe_circle"></div>
+              <div class="loupe_line"></div>
+            </div>
+          </button>
+          <i class="fa-solid fa-xmark"></i>
+        </form>
+      </header>
+      <main id="main">
+        <div id="filter_bar">
+          <div id="filter_ctn">
+            <!--<div class="filter">
+              <div class="filter_hd">
+                <label>Ingrédients</label
+                ><i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <form class="filter_search">
+                <input class="filter_input" />
+                <button>
+                  <div class="loupe_ctn">
+                    <div class="loupe_circle"></div>
+                    <div class="loupe_line"></div>
+                  </div>
+                </button>
+              </form>
+              <ul class="filter_selection_list">
+                <li>
+                  <div class="bg_selection"></div>
+                  <span>Jus de citron</span>
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </li>
+                <li>
+                  <div class="bg_selection"></div>
+                  <span>Jus de citron</span>
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </li>
+              </ul>
+              <ul class="filter_choises_list">
+                <li>Jus de citron</li>
+                <li>Glaçons</li>
+                <li>Tomate</li>
+                <li>Poulet</li>
+                <li>Poivron rouge</li>
+                <li>Thon en miettes</li>
+                <li>Vinaigrette</li>
+              </ul>
+            </div>-->
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="scripts/pages/index.js"></script>
+  </body>
+</html>

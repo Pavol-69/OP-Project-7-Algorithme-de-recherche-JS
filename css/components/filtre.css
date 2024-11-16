@@ -1,0 +1,152 @@
+.filter {
+  /*Position*/
+  padding: 17px;
+
+  /*Dimensions*/
+  max-height: 315px;
+
+  min-height: 22px;
+  width: 195px;
+
+  /*Texte*/
+  color: var(--blk);
+  font-size: 14px;
+
+  /*Style*/
+  background-color: var(--wht);
+  border-radius: 11px;
+  overflow: hidden;
+
+  /*Flex*/
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  /*Animation*/
+  transition: 0.5s;
+}
+
+.filter .filter_hd {
+  /*Dimensions*/
+  width: 100%;
+
+  /*Flex*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter label {
+  /*Texte*/
+  font-size: 16px;
+}
+
+.filter .filter_search {
+  /*Position*/
+  position: relative;
+  margin: 15px 0px;
+
+  /*Dimensions*/
+  height: 36px;
+  width: 100%;
+
+  /*Style*/
+  color: #7a7a7a;
+
+  /*Flex*/
+  display: flex;
+  align-items: center;
+}
+
+.filter input {
+  /*Position*/
+  padding-left: 15px;
+
+  /*Dimensions*/
+  height: 36px;
+  width: 100%;
+
+  /*Style*/
+  color: #7a7a7a;
+  border: solid 2px #c6c6c6;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.filter button {
+  /*Position*/
+  position: absolute;
+  right: 10px;
+
+  /*Style*/
+  background-color: var(--wht);
+  border: 0;
+  cursor: pointer;
+}
+
+.filter .loupe_ctn {
+  /*Dimensions*/
+  height: 14px;
+  width: 14px;
+}
+
+.filter_selection_list {
+  /*Dimension*/
+  width: 100%;
+}
+
+.filter_selection_list li {
+  /*Position*/
+  position: relative;
+}
+
+.bg_selection {
+  /*Position*/
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: -17px;
+  right: -17px;
+  z-index: 1;
+
+  /*Style*/
+  background-color: var(--prm);
+}
+
+.filter_selection_list .fa-circle-xmark {
+  /*Position*/
+  position: absolute;
+  right: 0px;
+
+  /*Dimensions*/
+  font-size: 17px;
+
+  /*Style*/
+  display: none;
+  cursor: pointer;
+}
+
+.filter_selection_list li:hover {
+  /*Texte*/
+  font-weight: 700;
+}
+
+.filter_selection_list li:hover > .fa-circle-xmark {
+  /*Style*/
+  display: block;
+}
+
+li span,
+li .fa-circle-xmark {
+  /*Position*/
+  z-index: 2;
+}
+
+.filter li {
+  /*Dimensions*/
+  height: 37px;
+
+  /*Flex*/
+  display: flex;
+  align-items: center;
+}

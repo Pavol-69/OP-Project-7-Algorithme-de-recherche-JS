@@ -1,0 +1,193 @@
+header {
+  /*Position*/
+  position: relative;
+
+  /*Dimensions*/
+  height: 667px;
+  width: 100%;
+
+  /*Style*/
+  overflow: hidden;
+
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+}
+
+header img {
+  /*Dimensions*/
+  object-fit: cover;
+  max-width: 100%;
+  min-height: 100%;
+}
+
+header .shadow {
+  /*Dimensions*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  /*Style*/
+  background-color: #000000;
+  opacity: 0.3;
+}
+
+#logo_ctn {
+  /*Position*/
+  position: absolute;
+  left: 69px;
+  top: 51px;
+
+  /*Dimensions*/
+  height: 25px;
+
+  /*Flex*/
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+
+  /*Style*/
+  overflow: hidden;
+}
+
+#logo_ctn span {
+  /*Texte*/
+  font-family: "Anton";
+  line-height: 22px;
+  font-size: 25px;
+  color: var(--wht);
+
+  /*Flex*/
+  display: flex;
+  align-items: flex-end;
+}
+
+#circle_ctn {
+  /*Dimensions*/
+  width: 22px;
+  height: 22px;
+
+  /*Flex*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#circle_ctn .circle1,
+#circle_ctn .circle2 {
+  /*Position*/
+  position: absolute;
+
+  /*Style*/
+  border-radius: 50%;
+  border: solid 2px var(--blk);
+  background-color: var(--wht);
+}
+
+#circle_ctn .circle1 {
+  /*Dimensions*/
+  width: 18px;
+  height: 18px;
+}
+
+#circle_ctn .circle2 {
+  /*Dimensions*/
+  width: 12px;
+  height: 12px;
+}
+
+.search_ctn {
+  /*Position*/
+  position: absolute;
+  top: 245px;
+
+  /*Dimensions*/
+  max-width: 954px;
+  margin: 0px 40px;
+
+  /*Flex*/
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.search_ctn label {
+  /*Dimensions*/
+
+  /*Texte*/
+  font-size: 44px;
+  font-family: "Anton";
+  color: var(--prm);
+  font-weight: 400;
+  text-align: center;
+}
+
+.search_ctn input {
+  /*Position*/
+  padding-left: 35px;
+
+  /*Dimensions*/
+  height: 70px;
+
+  /*Style*/
+  border: 0px;
+  border-radius: 11px;
+
+  /*Texte*/
+  font-family: "Manrope";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.search_ctn .search_btn {
+  /*Position*/
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  /*Dimensions*/
+  height: 52px;
+  width: 51px;
+
+  /*Style*/
+  border: 0px;
+  border-radius: 10px;
+  background-color: var(--blk);
+  cursor: pointer;
+  color: var(--wht);
+
+  /*Flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*Animation*/
+  transition: 0.2s;
+}
+
+.search_btn:hover {
+  /*Style*/
+  background-color: var(--prm);
+  color: var(--blk);
+}
+
+.search_ctn .loupe_ctn {
+  /*Dimensions*/
+  height: 28px;
+  width: 28px;
+}
+
+.search_ctn .fa-xmark {
+  /*Position*/
+  position: absolute;
+  bottom: 25px;
+  right: 80px;
+
+  /*Style*/
+  color: #7a7a7a;
+  font-size: 21px;
+  cursor: pointer;
+  display: none;
+}
