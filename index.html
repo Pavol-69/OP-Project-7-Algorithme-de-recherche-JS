@@ -4,6 +4,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/components/header.css" rel="stylesheet" type="text/css" />
     <link href="css/components/filtre.css" rel="stylesheet" type="text/css" />
+    <link href="css/components/recette.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,47 +58,13 @@
         </form>
       </header>
       <main id="main">
-        <div id="filter_bar">
-          <div id="filter_ctn">
-            <!--<div class="filter">
-              <div class="filter_hd">
-                <label>Ingrédients</label
-                ><i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <form class="filter_search">
-                <input class="filter_input" />
-                <button>
-                  <div class="loupe_ctn">
-                    <div class="loupe_circle"></div>
-                    <div class="loupe_line"></div>
-                  </div>
-                </button>
-              </form>
-              <ul class="filter_selection_list">
-                <li>
-                  <div class="bg_selection"></div>
-                  <span>Jus de citron</span>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </li>
-                <li>
-                  <div class="bg_selection"></div>
-                  <span>Jus de citron</span>
-                  <i class="fa-solid fa-circle-xmark"></i>
-                </li>
-              </ul>
-              <ul class="filter_choises_list">
-                <li>Jus de citron</li>
-                <li>Glaçons</li>
-                <li>Tomate</li>
-                <li>Poulet</li>
-                <li>Poivron rouge</li>
-                <li>Thon en miettes</li>
-                <li>Vinaigrette</li>
-              </ul>
-            </div>-->
-          </div>
-        </div>
+        <section id="filter_bar">
+          <div id="filter_ctn"></div>
+          <span id="nb_rct"></span>
+        </section>
+        <section id="rct_ctn"></section>
       </main>
+      <footer></footer>
     </div>
     <script type="module" src="scripts/pages/index.js"></script>
   </body>

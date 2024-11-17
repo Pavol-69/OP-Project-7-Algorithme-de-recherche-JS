@@ -3,6 +3,7 @@
   --prm: #ffd15b;
   --wht: #ffffff;
   --gry: #ededed;
+  --drk-gry: #7a7a7a;
   --blk: #1b1b1b;
 }
 
@@ -26,6 +27,38 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  /*Dimensions*/
+  margin: 0px;
+  padding: 0px;
+
+  /*Texte*/
+  font-family: "Anton";
+  font-weight: 400;
+  font-size: 18px;
+}
+
+h2 {
+  /*Dimensions*/
+  margin: 0px;
+  padding: 0px;
+
+  /*Texte*/
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--drk-gry);
+}
+
+p {
+  /*Dimensions*/
+  margin: 0px;
+  padding: 0px;
+
+  /*Texte*/
+  font-weight: 400;
+  font-size: 14px;
 }
 
 #main_ctn {
@@ -66,4 +99,14 @@ ul {
 
   /*Style*/
   border-right: solid 1px;
+}
+
+main {
+  /*Position*/
+  padding: 0px 100px;
+}
+
+footer {
+  /*Dimensions*/
+  height: 100px;
 }

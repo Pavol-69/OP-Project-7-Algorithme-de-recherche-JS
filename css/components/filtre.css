@@ -1,12 +1,35 @@
+#filter_bar {
+  /*Position*/
+  position: relative;
+  margin: 21px 0px;
+
+  /*Dimensions*/
+  height: 56px;
+
+  /*Flex*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filter_ctn {
+  /*Position*/
+  position: absolute;
+  top: 0px;
+
+  /*Flex*/
+  display: flex;
+  gap: 65px;
+}
+
 .filter {
   /*Position*/
   padding: 17px;
 
   /*Dimensions*/
   max-height: 315px;
-
-  min-height: 22px;
-  width: 195px;
+  height: 22px;
+  width: 161px;
 
   /*Texte*/
   color: var(--blk);
@@ -41,6 +64,11 @@
   font-size: 16px;
 }
 
+.filter i {
+  /*Style*/
+  cursor: pointer;
+}
+
 .filter .filter_search {
   /*Position*/
   position: relative;
@@ -51,7 +79,8 @@
   width: 100%;
 
   /*Style*/
-  color: #7a7a7a;
+  color: var(--drk-gry);
+  opacity: 0;
 
   /*Flex*/
   display: flex;
@@ -67,8 +96,8 @@
   width: 100%;
 
   /*Style*/
-  color: #7a7a7a;
-  border: solid 2px #c6c6c6;
+  color: var(--drk-gry);
+  border: solid 1px #c6c6c6;
   border-radius: 2px;
   font-size: 14px;
 }
@@ -145,6 +174,57 @@ li .fa-circle-xmark {
 .filter li {
   /*Dimensions*/
   height: 37px;
+  width: 100%;
+
+  /*Flex*/
+  display: flex;
+  align-items: center;
+}
+
+.filter_choises_list {
+  /*Dimensions*/
+  width: 100%;
+
+  /*Scrollbar*/
+  overflow-y: scroll;
+}
+
+.filter_choises_list li {
+  /*Style*/
+  cursor: pointer;
+}
+
+.filter_choises_list li:hover {
+  /*Style*/
+  background-color: var(--gry);
+}
+
+.filter_choises_list::-webkit-scrollbar {
+  /*Dimensions*/
+  width: 4px;
+
+  /*Style*/
+  background-color: var(--gry);
+  border-radius: 2px;
+}
+
+.filter_choises_list::-webkit-scrollbar-thumb {
+  /*Style*/
+  background: var(--drk-gry);
+  border-radius: 4px;
+}
+
+#nb_rct {
+  /*Dimensions*/
+  height: 100%;
+
+  /*Position*/
+  margin-left: auto;
+
+  /*Texte*/
+  font-family: "Anton";
+  font-size: 21px;
+  font-weight: 400;
 
   /*Flex*/
   display: flex;
