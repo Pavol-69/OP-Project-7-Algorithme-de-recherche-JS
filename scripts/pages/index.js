@@ -23,4 +23,21 @@ function init() {
   recipes.forEach((rct) => rctCtn.appendChild(makeRecipeCard(rct)));
 }
 
+// Supprimer ce qu'il y a d'inscrit dans la searchBar quan don clique sur la croix
+const delSearch = document.getElementById("del_search");
+const searchBar = document.getElementById("search_bar");
+delSearch.addEventListener("click", () => {
+  delSearch.style.display = "none";
+  searchBar.value = "";
+});
+
+// On affiche la croix dès qu'on tape qq chose dans la searchBar
+searchBar.addEventListener("input", () => {
+  if (searchBar.value != "") {
+    delSearch.style.display = "block";
+  } else {
+    delSearch.style.display = "none";
+  }
+});
+
 init();

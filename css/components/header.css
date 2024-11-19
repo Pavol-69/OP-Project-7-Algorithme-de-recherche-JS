@@ -42,6 +42,7 @@ header .shadow {
 
   /*Dimensions*/
   height: 25px;
+  width: 207px;
 
   /*Flex*/
   display: flex;
@@ -52,50 +53,9 @@ header .shadow {
   overflow: hidden;
 }
 
-#logo_ctn span {
-  /*Texte*/
-  font-family: "Anton";
-  line-height: 22px;
-  font-size: 25px;
-  color: var(--wht);
-
-  /*Flex*/
-  display: flex;
-  align-items: flex-end;
-}
-
-#circle_ctn {
+#logo_ctn img {
   /*Dimensions*/
-  width: 22px;
-  height: 22px;
-
-  /*Flex*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#circle_ctn .circle1,
-#circle_ctn .circle2 {
-  /*Position*/
-  position: absolute;
-
-  /*Style*/
-  border-radius: 50%;
-  border: solid 2px var(--blk);
-  background-color: var(--wht);
-}
-
-#circle_ctn .circle1 {
-  /*Dimensions*/
-  width: 18px;
-  height: 18px;
-}
-
-#circle_ctn .circle2 {
-  /*Dimensions*/
-  width: 12px;
-  height: 12px;
+  object-fit: cover;
 }
 
 .search_ctn {
@@ -179,15 +139,21 @@ header .shadow {
   width: 28px;
 }
 
-.search_ctn .fa-xmark {
+.fa-xmark {
   /*Position*/
   position: absolute;
+
+  /*Style*/
+  color: #7a7a7a;
+  cursor: pointer;
+}
+
+.search_ctn .fa-xmark {
+  /*Position*/
   bottom: 25px;
   right: 80px;
 
   /*Style*/
-  color: #7a7a7a;
   font-size: 21px;
-  cursor: pointer;
   display: none;
 }
