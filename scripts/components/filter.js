@@ -56,54 +56,7 @@ export function filters(recipes) {
     const selectList = document.createElement("ul");
     const optionList = document.createElement("ul");
     const scroll = document.createElement("div");
-    list.forEach((elt) => {
-      const li = document.createElement("li");
-      li.textContent = elt;
-      optionList.appendChild(li);
-
-      // Chaque élément sélectionné doit être répertorié pour la recherche
-      li.addEventListener("click", () => {
-        // On vérifie d'abord si l'élément n'existe pas déjà
-        let bool = true;
-        selectList.childNodes.forEach((elt) => {
-          if (li.textContent == elt.textContent) {
-            bool = false;
-          }
-        });
-        if (bool) {
-          const liSelect = document.createElement("li");
-          const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
-          del.className = "fa-solid fa-circle-xmark";
-          liSelect.textContent = li.textContent;
-          liSelect.appendChild(del);
-          selectList.appendChild(liSelect);
-
-          // On ajoute également l'élément dans la section tag
-          const tagCtn = document.getElementById("tag_ctn");
-          const tag = document.createElement("div");
-          const delTag = document.createElement("i");
-          tag.className = "tag";
-          delTag.className = "fa-solid fa-xmark";
-          tag.innerHTML = li.textContent;
-          tag.appendChild(delTag);
-          tagCtn.appendChild(tag);
-
-          // Evènement suppression de l'élément si on clique sur le bouton supprimer
-          del.addEventListener("click", () => {
-            delSelect();
-          });
-
-          delTag.addEventListener("click", () => {
-            delSelect();
-          });
-
-          function delSelect() {
-            selectList.removeChild(liSelect);
-            tagCtn.removeChild(tag);
-          }
-        }
-      });
-    });
+    creationList(list, optionList, selectList);
 
     // Remplissage des éléments HTML
     label.textContent = name;
@@ -154,17 +107,17 @@ export function filters(recipes) {
     // Ajout de la fonction effacer dans l'input
     erase.addEventListener("click", () => {
       input.value = "";
-      majList(input.value, list, optionList, erase);
+      majList(input.value, list, optionList, erase, selectList);
     });
 
     // Evènement à chaque fois qu'on change qq chose dans input, ou qu'on clique sur la loupe
     // On met à jour la liste de proposition
     input.addEventListener("input", () => {
-      majList(input.value, list, optionList, erase);
+      majList(input.value, list, optionList, erase, selectList);
     });
     searchBar.addEventListener("submit", (e) => {
       e.preventDefault();
-      majList(input.value, list, optionList, erase);
+      majList(input.value, list, optionList, erase, selectList);
     });
 
     return filter;
@@ -195,7 +148,7 @@ export function filters(recipes) {
   }
 
   // Met à jour la liste du filtre en fonction de ce qu'on écrit dans l'input
-  function majList(inputVal, list, optionList, erase) {
+  function majList(inputVal, list, optionList, erase, selectList) {
     let newList = [];
 
     // On affiche le bouton effacer s'il y a une valeur
@@ -214,10 +167,58 @@ export function filters(recipes) {
 
     // On reconstitue ensuite le HTML
     optionList.innerHTML = "";
-    newList.forEach((elt) => {
+    creationList(newList, optionList, selectList);
+  }
+
+  // Création de la liste dans chaque filtre
+  function creationList(list, optionList, selectList) {
+    list.forEach((elt) => {
       const li = document.createElement("li");
       li.textContent = elt;
       optionList.appendChild(li);
+
+      // Chaque élément sélectionné doit être répertorié pour la recherche
+      li.addEventListener("click", () => {
+        // On vérifie d'abord si l'élément n'existe pas déjà
+        let bool = true;
+        selectList.childNodes.forEach((elt) => {
+          if (li.textContent == elt.textContent) {
+            bool = false;
+          }
+        });
+        if (bool) {
+          const liSelect = document.createElement("li");
+          const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
+          del.className = "fa-solid fa-circle-xmark";
+          liSelect.textContent = li.textContent;
+          liSelect.appendChild(del);
+          selectList.appendChild(liSelect);
+
+          // On ajoute également l'élément dans la section tag
+          const tagCtn = document.getElementById("tag_ctn");
+          const tag = document.createElement("div");
+          const delTag = document.createElement("i");
+          tag.className = "tag";
+          delTag.className = "fa-solid fa-xmark";
+          tag.innerHTML = li.textContent;
+          tag.appendChild(delTag);
+          tagCtn.appendChild(tag);
+
+          // Evènement suppression de l'élément si on clique sur le bouton supprimer
+          del.addEventListener("click", () => {
+            delSelect();
+          });
+
+          delTag.addEventListener("click", () => {
+            delSelect();
+          });
+
+          function delSelect() {
+            selectList.removeChild(liSelect);
+            tagCtn.removeChild(tag);
+          }
+        }
+      });
     });
   }
 
