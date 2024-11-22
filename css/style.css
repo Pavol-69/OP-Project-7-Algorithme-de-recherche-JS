@@ -64,6 +64,7 @@ p {
 #main_ctn {
   /*Dimensions*/
   max-width: 1440px;
+  min-width: 375px;
   width: 100%;
 }
 
@@ -109,4 +110,18 @@ main {
 footer {
   /*Dimensions*/
   height: 100px;
+}
+
+@media (max-width: 1100px) {
+  main {
+    /*Dimensions*/
+    padding: 0px 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  main {
+    /*Dimensions*/
+    padding: 0px;
+  }
 }

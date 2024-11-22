@@ -157,3 +157,84 @@ header .shadow {
   font-size: 21px;
   display: none;
 }
+
+@media (max-width: 1100px) {
+  header {
+    /*Dimensions*/
+    height: 450px;
+  }
+
+  .search_ctn {
+    /*Position*/
+    top: 180px;
+  }
+
+  .search_ctn label {
+    /*Texte*/
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  header {
+    /*Dimensions*/
+    height: 300px;
+  }
+
+  #logo_ctn {
+    /*Position*/
+    top: 30px;
+    left: 0px;
+
+    /*Dimensions*/
+    width: 100%;
+
+    /*Flex*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #logo_ctn img {
+    /*Dimensions*/
+    height: 25px;
+  }
+
+  .search_ctn {
+    /*Position*/
+    top: 100px;
+
+    /*Flex*/
+    gap: 20px;
+  }
+
+  .search_ctn label {
+    /*Texte*/
+    font-size: 23px;
+  }
+
+  .search_ctn input {
+    /*Dimensions*/
+    height: 50px;
+    padding-left: 20px;
+
+    /*Texte*/
+    font-size: 13px;
+  }
+
+  .search_ctn .search_btn {
+    /*Position*/
+    right: 6px;
+    bottom: 6px;
+
+    /*Dimensions*/
+    height: 40px;
+    width: 40px;
+  }
+
+  .search_ctn .fa-xmark {
+    /*Position*/
+    bottom: 15px;
+    right: 20px;
+  }
+}
