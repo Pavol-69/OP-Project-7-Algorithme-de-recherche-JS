@@ -96,13 +96,20 @@ export function filters(recipes) {
     );
 
     // Ajout de l'évènement onBlur pour réduire les menus quand on clique ailleurs
-    /*filter.setAttribute("tabIndex", "0"); // Obligatoire pour l'évènement
-    filter.onblur = filterOnBlur;
+    filter.setAttribute("tabIndex", "0"); // Obligatoire pour l'évènement
+    input.setAttribute("tabIndex", "0");
+    filter.addEventListener("blur", () => filterOnBlur());
+    input.addEventListener("blur", () => filterOnBlur());
     function filterOnBlur() {
+      input.addEventListener("focus", () => {
+        chevron.className = "fa-solid fa-chevron-up";
+        filter.style.height = "auto";
+        searchBar.style.opacity = "1";
+      });
       chevron.className = "fa-solid fa-chevron-down";
       filter.style.height = "22px";
       searchBar.style.opacity = "0";
-    }*/
+    }
 
     // Ajout de la fonction effacer dans l'input
     erase.addEventListener("click", () => {
@@ -127,7 +134,7 @@ export function filters(recipes) {
   function alreadyExist(list, elt) {
     let bool = false;
     list.forEach((listElt) => {
-      if (listElt == elt) {
+      if (listElt.toLowerCase() == elt.toLowerCase()) {
         bool = true;
       }
     });

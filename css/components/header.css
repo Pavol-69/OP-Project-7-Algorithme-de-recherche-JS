@@ -204,6 +204,9 @@ header .shadow {
     /*Position*/
     top: 100px;
 
+    /*Dimensions*/
+    margin: 0 15px;
+
     /*Flex*/
     gap: 20px;
   }
@@ -222,6 +225,11 @@ header .shadow {
     font-size: 13px;
   }
 
+  .search_ctn input::placeholder {
+    /*Texte*/
+    content: "toto";
+  }
+
   .search_ctn .search_btn {
     /*Position*/
     right: 6px;
@@ -235,6 +243,6 @@ header .shadow {
   .search_ctn .fa-xmark {
     /*Position*/
     bottom: 15px;
-    right: 20px;
+    right: 60px;
   }
 }

@@ -111,3 +111,15 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 800px) {
+  #rct_ctn {
+    /*Dimensions*/
+    padding: 0 15px;
+  }
+
+  .recette {
+    /*Diumensions*/
+    width: 320px;
+  }
+}
