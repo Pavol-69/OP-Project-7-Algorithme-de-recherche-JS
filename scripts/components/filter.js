@@ -100,6 +100,12 @@ export function filters(recipes) {
     input.setAttribute("tabIndex", "0");
     filter.addEventListener("blur", () => filterOnBlur());
     input.addEventListener("blur", () => filterOnBlur());
+
+    /* Contexte : 
+    - On veut réduire le filtre quand on clique ailleurs => event blur
+    - L'event blur se déclenche quand on fait un focus sur un autre élément
+    - Le problème, quand on clique sur l'input à l'intérieur du filter
+    */
     function filterOnBlur() {
       input.addEventListener("focus", () => {
         chevron.className = "fa-solid fa-chevron-up";
