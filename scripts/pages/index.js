@@ -1,6 +1,7 @@
 import { recipes } from "../database/recipes.js";
 import { filters } from "../components/filter.js";
-import { makeRecipeCard } from "../components/recipe.js";
+import { displayRecipes } from "../functions/displayRecipes.js";
+import { search } from "../functions/search.js";
 
 function init() {
   // 1 - Création des filtres
@@ -15,12 +16,9 @@ function init() {
   filterCtn.appendChild(
     allFilters.createFilter("Ustensiles", allFilters.getAllUst())
   );
-  const nbRct = document.getElementById("nb_rct");
-  nbRct.textContent = `${recipes.length} recettes`;
 
   // 2 - Création des tuiles recette
-  const rctCtn = document.getElementById("rct_ctn");
-  recipes.forEach((rct) => rctCtn.appendChild(makeRecipeCard(rct)));
+  displayRecipes(recipes);
 }
 
 // Supprimer ce qu'il y a d'inscrit dans la searchBar quan don clique sur la croix
@@ -29,12 +27,14 @@ const searchBar = document.getElementById("search_bar");
 delSearch.addEventListener("click", () => {
   delSearch.style.display = "none";
   searchBar.value = "";
+  displayRecipes(recipes);
 });
 
 // On affiche la croix dès qu'on tape qq chose dans la searchBar
 searchBar.addEventListener("input", () => {
   if (searchBar.value != "") {
     delSearch.style.display = "block";
+    search(recipes, searchBar.value);
   } else {
     delSearch.style.display = "none";
   }
