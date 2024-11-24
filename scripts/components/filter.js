@@ -1,5 +1,10 @@
+import { search } from "../functions/search.js";
+
 // Extraction de toutes les données aux filtres, puis on renvoie les éléments HTML relatifs aux différents filtres
 export function filters(recipes) {
+  const MainSearchBar = document.getElementById("search_bar");
+  const filterCtn = document.getElementById("filter_ctn");
+
   // Extraction de tous les ingrédients de recipes
   function getAllIng() {
     let allIng = []; // array avec tous les ingrédients
@@ -99,16 +104,16 @@ export function filters(recipes) {
     filter.setAttribute("tabIndex", "0"); // Obligatoire pour l'évènement
     input.setAttribute("tabIndex", "0");
     filter.addEventListener("blur", () => filterOnBlur());
-    input.addEventListener("blur", () => filterOnBlur());
+
     function filterOnBlur() {
+      chevron.className = "fa-solid fa-chevron-down";
+      filter.style.height = "22px";
+      searchBar.style.opacity = "0";
       input.addEventListener("focus", () => {
         chevron.className = "fa-solid fa-chevron-up";
         filter.style.height = "auto";
         searchBar.style.opacity = "1";
       });
-      chevron.className = "fa-solid fa-chevron-down";
-      filter.style.height = "22px";
-      searchBar.style.opacity = "0";
     }
 
     // Ajout de la fonction effacer dans l'input
@@ -119,6 +124,7 @@ export function filters(recipes) {
 
     // Evènement à chaque fois qu'on change qq chose dans input, ou qu'on clique sur la loupe
     // On met à jour la liste de proposition
+
     input.addEventListener("input", () => {
       majList(input.value, list, optionList, erase, selectList);
     });
@@ -179,12 +185,21 @@ export function filters(recipes) {
 
   // Création de la liste dans chaque filtre
   function creationList(list, optionList, selectList) {
+    const tagCtn = document.getElementById("tag_ctn");
+
     list.forEach((elt) => {
       const li = document.createElement("li");
       li.textContent = elt;
       optionList.appendChild(li);
 
-      // Chaque élément sélectionné doit être répertorié pour la recherche
+      // S'il existe des tags déjà présents, il faut les recréer en tant que sélection
+      tagCtn.childNodes.forEach((tagElt) => {
+        if (tagElt.textContent == elt) {
+          selectionCreation(elt, tagElt);
+        }
+      });
+
+      // Chaque élément sélectionné doit être répertorié pour la recherche => Ajout dans sélection et tags donc
       li.addEventListener("click", () => {
         // On vérifie d'abord si l'élément n'existe pas déjà
         let bool = true;
@@ -194,38 +209,48 @@ export function filters(recipes) {
           }
         });
         if (bool) {
-          const liSelect = document.createElement("li");
-          const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
-          del.className = "fa-solid fa-circle-xmark";
-          liSelect.textContent = li.textContent;
-          liSelect.appendChild(del);
-          selectList.appendChild(liSelect);
+          selectionCreation(li.textContent, tagCreation(li.textContent));
 
-          // On ajoute également l'élément dans la section tag
-          const tagCtn = document.getElementById("tag_ctn");
-          const tag = document.createElement("div");
-          const delTag = document.createElement("i");
-          tag.className = "tag";
-          delTag.className = "fa-solid fa-xmark";
-          tag.innerHTML = li.textContent;
-          tag.appendChild(delTag);
-          tagCtn.appendChild(tag);
-
-          // Evènement suppression de l'élément si on clique sur le bouton supprimer
-          del.addEventListener("click", () => {
-            delSelect();
-          });
-
-          delTag.addEventListener("click", () => {
-            delSelect();
-          });
-
-          function delSelect() {
-            selectList.removeChild(liSelect);
-            tagCtn.removeChild(tag);
-          }
+          // Maj des éléments à afficher selon la selection
+          search(MainSearchBar.value, filterCtn);
         }
       });
+      function tagCreation(name) {
+        const tag = document.createElement("div");
+        const delTag = document.createElement("i");
+        tag.className = "tag";
+        delTag.className = "fa-solid fa-xmark";
+        tag.innerHTML = name;
+        tag.appendChild(delTag);
+        tagCtn.appendChild(tag);
+
+        return tag;
+      }
+
+      function selectionCreation(name, tag) {
+        const liSelect = document.createElement("li");
+        const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
+        del.className = "fa-solid fa-circle-xmark";
+        liSelect.textContent = name;
+        liSelect.appendChild(del);
+        selectList.appendChild(liSelect);
+
+        // Evènement suppression de l'élément si on clique sur le bouton supprimer
+        del.addEventListener("click", () => {
+          delSelect(liSelect, tag);
+        });
+
+        // On l'ajoute aussi à tag, et on le fait ici car des selection peuvent être créées à partir de tags
+        tag.childNodes[1].addEventListener("click", () => {
+          delSelect(liSelect, tag);
+        });
+      }
+
+      function delSelect(selection, tag) {
+        selectList.removeChild(selection);
+        tagCtn.removeChild(tag);
+        search(MainSearchBar.value, filterCtn);
+      }
     });
   }
 

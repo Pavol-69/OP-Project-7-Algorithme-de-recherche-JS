@@ -1,29 +1,22 @@
 import { recipes } from "../database/recipes.js";
-import { filters } from "../components/filter.js";
+import { displayFilters } from "../functions/displayFilters.js";
 import { displayRecipes } from "../functions/displayRecipes.js";
 import { search } from "../functions/search.js";
 
 function init() {
   // 1 - Création des filtres
-  const allFilters = filters(recipes);
-  const filterCtn = document.getElementById("filter_ctn");
-  filterCtn.appendChild(
-    allFilters.createFilter("Ingrédient", allFilters.getAllIng())
-  );
-  filterCtn.appendChild(
-    allFilters.createFilter("Appareil", allFilters.getAllApp())
-  );
-  filterCtn.appendChild(
-    allFilters.createFilter("Ustensiles", allFilters.getAllUst())
-  );
+  displayFilters(recipes);
 
   // 2 - Création des tuiles recette
   displayRecipes(recipes);
 }
 
-// Supprimer ce qu'il y a d'inscrit dans la searchBar quan don clique sur la croix
 const delSearch = document.getElementById("del_search");
 const searchBar = document.getElementById("search_bar");
+const searchForm = document.getElementById("search_ctn");
+const filterCtn = document.getElementById("filter_ctn");
+
+// Supprimer ce qu'il y a d'inscrit dans la searchBar quan don clique sur la croix
 delSearch.addEventListener("click", () => {
   delSearch.style.display = "none";
   searchBar.value = "";
@@ -34,10 +27,16 @@ delSearch.addEventListener("click", () => {
 searchBar.addEventListener("input", () => {
   if (searchBar.value != "") {
     delSearch.style.display = "block";
-    search(recipes, searchBar.value);
+    search(searchBar.value, filterCtn); // On lance également une recherche
   } else {
     delSearch.style.display = "none";
   }
+});
+
+// On lance une recherche au submit
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  search(searchBar.value, filterCtn);
 });
 
 init();
