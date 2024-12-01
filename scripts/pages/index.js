@@ -2,6 +2,7 @@ import { recipes } from "../database/recipes.js";
 import { displayFilters } from "../functions/displayFilters.js";
 import { displayRecipes } from "../functions/displayRecipes.js";
 import { search } from "../functions/search.js";
+import { verifInput } from "../functions/verifInput.js";
 
 function init() {
   // 1 - Création des filtres
@@ -27,7 +28,9 @@ delSearch.addEventListener("click", () => {
 searchBar.addEventListener("input", () => {
   if (searchBar.value != "") {
     delSearch.style.display = "block";
-    search(searchBar.value, filterCtn); // On lance également une recherche
+    if (verifInput(searchBar.value)) {
+      search(searchBar.value, filterCtn); // On lance également une recherche
+    }
   } else {
     delSearch.style.display = "none";
   }
@@ -36,7 +39,9 @@ searchBar.addEventListener("input", () => {
 // On lance une recherche au submit
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  search(searchBar.value, filterCtn);
+  if (verifInput(searchBar.value)) {
+    search(searchBar.value, filterCtn);
+  }
 });
 
 init();

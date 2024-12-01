@@ -5,7 +5,6 @@ import { recipes } from "../database/recipes.js";
 
 export function search(myInput, filterCtn) {
   const rctCtn = document.getElementById("rct_ctn");
-
   let result = [];
 
   // 1 - On filtre les recettes par rapport à ce qu'il y a dans la searchBar
