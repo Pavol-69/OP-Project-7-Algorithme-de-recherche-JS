@@ -34,6 +34,8 @@ export function displaySearch(myInput) {
   const rctCtn = document.getElementById("rct_ctn");
   const result = search(myInput);
 
+  rctCtn.innerHTML = "";
+
   if (result.length == 0) {
     // Si aucun résultat, on met le message d'erreur
     const message = document.createElement("span");
@@ -41,8 +43,7 @@ export function displaySearch(myInput) {
     message.textContent = "Aucune correspance trouvée..";
     rctCtn.appendChild(message);
   } else {
-    // On efface tout et on réécrit => obligé de faire ça à chaque changement, dans le cas où on passe de 3 à 2 caractères
-    rctCtn.innerHTML = "";
+    // Sinon on affiche result
     displayRecipes(result);
   }
 }
