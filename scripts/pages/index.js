@@ -1,7 +1,7 @@
 import { recipes } from "../database/recipes.js";
 import { filters } from "../components/filter.js";
 import { displayRecipes } from "../functions/displayRecipes.js";
-import { search } from "../functions/search.js";
+import { displaySearch } from "../functions/search.js";
 
 function init() {
   // 1 - Création des filtres
@@ -34,7 +34,7 @@ delSearch.addEventListener("click", () => {
 searchBar.addEventListener("input", () => {
   if (searchBar.value != "") {
     delSearch.style.display = "block";
-    search(recipes, searchBar.value);
+    displaySearch(searchBar.value);
   } else {
     delSearch.style.display = "none";
   }
