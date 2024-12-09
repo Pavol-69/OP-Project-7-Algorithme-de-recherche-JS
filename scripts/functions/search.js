@@ -1,13 +1,9 @@
 import { displayRecipes } from "../functions/displayRecipes.js";
+import { recipes } from "../database/recipes.js";
 
-export function search(recipes, myInput) {
-  const rctCtn = document.getElementById("rct_ctn");
-
+function search(myInput) {
   // la recherche ne lance que si on a 3 caractères ou plus
   if (myInput.length >= 3) {
-    // On efface tout
-    rctCtn.innerHTML = "";
-
     let result = [];
 
     // Parcours de toute les recettes
@@ -41,19 +37,26 @@ export function search(recipes, myInput) {
       }
     }
 
-    // Affichage des éléments présents dans result
-    displayRecipes(result);
-
-    if (result.length == 0) {
-      // Si aucun résultat, on met le message d'erreur
-      const message = document.createElement("span");
-      message.className = "no_result";
-      message.textContent = "Aucune correspance trouvée..";
-      rctCtn.appendChild(message);
-    }
+    return result;
   } else {
-    // On efface tout et on réécrit => obligé de faire ça à chaque changement, dans le cas où on passe de 3 à 2 caractères
-    rctCtn.innerHTML = "";
-    displayRecipes(recipes);
+    return recipes;
+  }
+}
+
+export function displaySearch(myInput) {
+  // Affiche les bons éléments en fonction de ce que nous retourne la fonction search
+  const result = search(myInput);
+  const rctCtn = document.getElementById("rct_ctn");
+
+  rctCtn.innerHTML = "";
+
+  if (result.length == 0) {
+    // Si aucun résultat, on met le message d'erreur
+    const message = document.createElement("span");
+    message.className = "no_result";
+    message.textContent = "Aucune correspance trouvée..";
+    rctCtn.appendChild(message);
+  } else {
+    displayRecipes(result);
   }
 }

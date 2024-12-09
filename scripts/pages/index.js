@@ -1,6 +1,6 @@
 import { recipes } from "../database/recipes.js";
 import { filters } from "../components/filter.js";
-import { search } from "../functions/search.js";
+import { displaySearch } from "../functions/search.js";
 import { displayRecipes } from "../functions/displayRecipes.js";
 
 function init() {
@@ -39,7 +39,7 @@ searchBar.addEventListener("input", () => {
   }
 
   // fonction recherche
-  search(recipes, searchBar.value);
+  displaySearch(searchBar.value);
 });
 
 init();
