@@ -8,9 +8,9 @@ export function getAllTags(filterCtn) {
     const selectionList = filterCtn.childNodes[i].childNodes[2].childNodes[0];
 
     // Parcours des tags sélectionnés
-    selectionList.childNodes.forEach((elt) => {
-      tagList[i].push(elt.textContent);
-    });
+    for (let j = 0; j < selectionList.childNodes.length; j++) {
+      tagList[i].push(selectionList.childNodes[j].textContent);
+    }
   }
   return tagList;
 }

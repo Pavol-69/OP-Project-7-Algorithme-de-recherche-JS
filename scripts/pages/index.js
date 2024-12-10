@@ -1,7 +1,7 @@
 import { recipes } from "../database/recipes.js";
 import { displayFilters } from "../functions/displayFilters.js";
 import { displayRecipes } from "../functions/displayRecipes.js";
-import { search } from "../functions/search.js";
+import { displaySearch } from "../functions/search.js";
 import { verifInput } from "../functions/verifInput.js";
 
 function init() {
@@ -22,15 +22,14 @@ delSearch.addEventListener("click", () => {
   delSearch.style.display = "none";
   searchBar.value = "";
   displayRecipes(recipes);
+  displayFilters(recipes);
 });
 
 // On affiche la croix dès qu'on tape qq chose dans la searchBar
 searchBar.addEventListener("input", () => {
   if (searchBar.value != "") {
     delSearch.style.display = "block";
-    if (verifInput(searchBar.value)) {
-      search(searchBar.value, filterCtn); // On lance également une recherche
-    }
+    displaySearch(verifInput(searchBar.value, searchBar), filterCtn); // On lance également une recherche
   } else {
     delSearch.style.display = "none";
   }
@@ -39,9 +38,7 @@ searchBar.addEventListener("input", () => {
 // On lance une recherche au submit
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (verifInput(searchBar.value)) {
-    search(searchBar.value, filterCtn);
-  }
+  displaySearch(verifInput(searchBar.value, searchBar), filterCtn);
 });
 
 init();

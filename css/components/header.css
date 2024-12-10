@@ -101,7 +101,7 @@ header .shadow {
   font-weight: 400;
 }
 
-#search_ctn .search_btn {
+#search_ctn .search_btn_ctn {
   /*Position*/
   position: absolute;
   right: 10px;
@@ -112,10 +112,9 @@ header .shadow {
   width: 51px;
 
   /*Style*/
-  border: 0px;
-  border-radius: 10px;
   background-color: var(--blk);
-  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
   color: var(--wht);
 
   /*Flex*/
@@ -127,7 +126,23 @@ header .shadow {
   transition: 0.2s;
 }
 
-.search_btn:hover {
+#search_ctn .search_btn_ctn .search_btn {
+  /*Position*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  /*Dimensions*/
+  height: 100%;
+  width: 100%;
+
+  /*Style*/
+  border: 0px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#search_ctn .search_btn_ctn:hover {
   /*Style*/
   background-color: var(--prm);
   color: var(--blk);
@@ -225,12 +240,7 @@ header .shadow {
     font-size: 13px;
   }
 
-  #search_ctn input::placeholder {
-    /*Texte*/
-    content: "toto";
-  }
-
-  #search_ctn .search_btn {
+  #search_ctn .search_btn_ctn {
     /*Position*/
     right: 6px;
     bottom: 6px;
@@ -238,6 +248,12 @@ header .shadow {
     /*Dimensions*/
     height: 40px;
     width: 40px;
+  }
+
+  #search_ctn .loupe_ctn {
+    /*Dimensions*/
+    height: 20px;
+    width: 20px;
   }
 
   #search_ctn .fa-xmark {

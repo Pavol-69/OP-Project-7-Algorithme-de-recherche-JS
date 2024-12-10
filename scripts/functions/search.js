@@ -3,34 +3,42 @@ import { displayFilters } from "../functions/displayFilters.js";
 import { getAllTags } from "../functions/getAllTags.js";
 import { recipes } from "../database/recipes.js";
 
-export function search(myInput, filterCtn) {
-  const rctCtn = document.getElementById("rct_ctn");
+function search(myInput, filterCtn) {
   let result = [];
 
   // 1 - On filtre les recettes par rapport à ce qu'il y a dans la searchBar
   // la recherche ne lance que si on a 3 caractères ou plus
   if (myInput.length >= 3) {
-    // On efface tout
-    rctCtn.innerHTML = "";
-
     // Parcours de toute les recettes
-    recipes.forEach((rct) => {
-      // Vérif dans les ingrédient
-      const resultIng = rct.ingredients.filter((ing) =>
-        ing.ingredient.toLowerCase().includes(myInput.toLowerCase())
-      );
+    for (let i = 0; i < recipes.length; i++) {
+      // Dès que ça match, on peut passer à i++, pas besoin d'aller plus loin
+      let match = false;
 
-      //Vérif si ce qui est rentré est dans le titre, la description, ou les ingrédients
-      // et s'il y a un match dans les tags
+      //Vérif dans le titre et description
       if (
-        myInput.length >= 3 &&
-        (rct.name.toLowerCase().includes(myInput.toLowerCase()) ||
-          rct.description.toLowerCase().includes(myInput.toLowerCase()) ||
-          resultIng.length > 0)
+        recipes[i].name.toLowerCase().includes(myInput.toLowerCase()) ||
+        recipes[i].description.toLowerCase().includes(myInput.toLowerCase())
       ) {
-        result.push(rct);
+        result.push(recipes[i]);
+        match = true;
       }
-    });
+
+      if (match) {
+        continue;
+      }
+
+      // Vérif dans les ingrédient
+      for (let j = 0; j < recipes[i].ingredients.length; j++) {
+        if (
+          recipes[i].ingredients[j].ingredient
+            .toLowerCase()
+            .includes(myInput.toLowerCase())
+        ) {
+          result.push(recipes[i]);
+          break;
+        }
+      }
+    }
   } else {
     // Si rien n'est spécifié, on recherche dans toutes les recettes
     result = recipes.slice(0);
@@ -45,37 +53,42 @@ export function search(myInput, filterCtn) {
     if (tagList[0].length == 0) {
       boolIng = false;
     }
-    tagList[0].forEach((tag) => {
-      result[i].ingredients.forEach((ing) => {
-        if (tag == ing.ingredient) {
+    for (let j = 0; j < tagList[0].length; j++) {
+      for (let k = 0; k < result[i].ingredients.length; k++) {
+        if (
+          tagList[0][j].toLowerCase() ==
+          result[i].ingredients[k].ingredient.toLowerCase()
+        ) {
           boolIng = false;
         }
-      });
-    });
+      }
+    }
 
     // Appareils
     let boolApp = true;
     if (tagList[1].length == 0) {
       boolApp = false;
     }
-    tagList[1].forEach((tag) => {
-      if (tag.toLowerCase() == result[i].appliance.toLowerCase()) {
+    for (let j = 0; j < tagList[1].length; j++) {
+      if (tagList[1][j].toLowerCase() == result[i].appliance.toLowerCase()) {
         boolApp = false;
       }
-    });
+    }
 
     // Ustensiles
     let boolUst = true;
     if (tagList[2].length == 0) {
       boolUst = false;
     }
-    tagList[2].forEach((tag) => {
-      result[i].ustensils.forEach((ust) => {
-        if (tag == ust) {
+    for (let j = 0; j < tagList[2].length; j++) {
+      for (let k = 0; k < result[i].ustensils.length; k++) {
+        if (
+          tagList[2][j].toLowerCase() == result[i].ustensils[k].toLowerCase()
+        ) {
           boolUst = false;
         }
-      });
-    });
+      }
+    }
 
     // Si rien n'a été détecté
     if (boolIng || boolApp || boolUst) {
@@ -83,8 +96,26 @@ export function search(myInput, filterCtn) {
     }
   }
 
-  // 3 - On affiche les résultats
-  // Affichage des éléments présents dans result + maj filtres
-  displayRecipes(result);
-  displayFilters(result);
+  return result;
+}
+
+export function displaySearch(myInput, filterCtn) {
+  // Affiche les bons éléments en fonction de ce que nous retourne la fonction search
+  const result = search(myInput, filterCtn);
+  const rctCtn = document.getElementById("rct_ctn");
+
+  rctCtn.innerHTML = "";
+
+  if (result.length == 0) {
+    // Si aucun résultat, on met le message d'erreur
+    displayRecipes([]);
+    displayFilters([]);
+    const message = document.createElement("span");
+    message.className = "no_result";
+    message.textContent = "Aucune correspance trouvée..";
+    rctCtn.appendChild(message);
+  } else {
+    displayRecipes(result);
+    displayFilters(result);
+  }
 }

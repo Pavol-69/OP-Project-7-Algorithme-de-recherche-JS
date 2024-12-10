@@ -1,4 +1,4 @@
-import { search } from "../functions/search.js";
+import { displaySearch } from "../functions/search.js";
 import { verifInput } from "../functions/verifInput.js";
 
 // Extraction de toutes les données aux filtres, puis on renvoie les éléments HTML relatifs aux différents filtres
@@ -130,15 +130,24 @@ export function filters(recipes) {
     // On met à jour la liste de proposition
 
     input.addEventListener("input", () => {
-      if (verifInput(input.value)) {
-        majList(input.value, list, optionList, erase, selectList);
-      }
+      majList(
+        verifInput(input.value, input),
+        list,
+        optionList,
+        erase,
+        selectList
+      );
     });
     searchBar.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (verifInput(input.value)) {
-        majList(input.value, list, optionList, erase, selectList);
-      }
+
+      majList(
+        verifInput(input.value, input),
+        list,
+        optionList,
+        erase,
+        selectList
+      );
     });
 
     return filter;
@@ -196,14 +205,15 @@ export function filters(recipes) {
     const tagCtn = document.getElementById("tag_ctn");
 
     list.forEach((elt) => {
+      const eltCrg = elt.charAt(0).toUpperCase() + elt.slice(1).toLowerCase(); // de façon à ce qu'il y ait une majuscule en première lettre, et le reste en majuscule;
       const li = document.createElement("li");
-      li.textContent = elt;
+      li.textContent = eltCrg;
       optionList.appendChild(li);
 
       // S'il existe des tags déjà présents, il faut les recréer en tant que sélection
       tagCtn.childNodes.forEach((tagElt) => {
-        if (tagElt.textContent == elt) {
-          selectionCreation(elt);
+        if (tagElt.textContent.toLowerCase() == eltCrg.toLowerCase()) {
+          selectionCreation(eltCrg);
         }
       });
 
@@ -220,9 +230,11 @@ export function filters(recipes) {
           selectionCreation(li.textContent);
           tagCreation(li.textContent);
           // Maj des éléments à afficher selon la selection
-          if (verifInput(MainSearchBar.value)) {
-            search(MainSearchBar.value, filterCtn);
-          }
+
+          displaySearch(
+            verifInput(MainSearchBar.value, MainSearchBar),
+            filterCtn
+          );
         }
       });
       function tagCreation(name) {
@@ -230,6 +242,7 @@ export function filters(recipes) {
         const delTag = document.createElement("i");
         tag.className = "tag";
         delTag.className = "fa-solid fa-xmark";
+
         tag.innerHTML = name;
         tag.appendChild(delTag);
         tagCtn.appendChild(tag);
@@ -289,7 +302,7 @@ export function filters(recipes) {
     //console.log("toto");
     selection.parentNode.removeChild(selection);
     tag.parentNode.removeChild(tag);
-    search(MainSearchBar.value, filterCtn);
+    displaySearch(MainSearchBar.value, filterCtn);
   }
 
   return { getAllIng, getAllApp, getAllUst, createFilter };

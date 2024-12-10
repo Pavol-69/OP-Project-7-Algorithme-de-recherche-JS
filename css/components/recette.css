@@ -112,6 +112,12 @@
   align-items: center;
 }
 
+.no_result {
+  /*Texte*/
+  font-size: 20px;
+  font-weight: 700;
+}
+
 @media (max-width: 800px) {
   #rct_ctn {
     /*Dimensions*/
