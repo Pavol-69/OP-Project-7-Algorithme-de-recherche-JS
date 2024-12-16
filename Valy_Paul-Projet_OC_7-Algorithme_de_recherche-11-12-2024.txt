@@ -1,0 +1,13 @@
+Github : https://github.com/Pavol-69/OP-Project-7-Algorithme-de-recherche-JS
+
+ - Branche main :
+	Juste HTML/CSS :  https://github.com/Pavol-69/OP-Project-7-Algorithme-de-recherche-JS
+
+ - Branche algo 1 - native :
+	Option de recherche 1 : https://github.com/Pavol-69/OP-Project-7-Algorithme-de-recherche-JS/tree/algo-1---native
+
+ - Branche algo 2 - array method :
+	Option de recherche 2 : https://github.com/Pavol-69/OP-Project-7-Algorithme-de-recherche-JS/tree/algo-2---array-method
+
+ - Branche algo 1 - with tag :
+	Code final basé sur l'option de recherche 1 : https://github.com/Pavol-69/OP-Project-7-Algorithme-de-recherche-JS/tree/algo-1---with-tag
