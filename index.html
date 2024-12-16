@@ -35,7 +35,7 @@
           <img src="./assets/header/logo.svg" alt="logo" />
         </div>
 
-        <form class="search_ctn">
+        <form id="search_ctn">
           <label>
             CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET
             DELICIEUSES
@@ -44,12 +44,13 @@
             id="search_bar"
             placeholder="Rechercher une recette, un ingrédient, ..."
           />
-          <button class="search_btn">
+          <div class="search_btn_ctn">
             <div class="loupe_ctn">
               <div class="loupe_circle"></div>
               <div class="loupe_line"></div>
             </div>
-          </button>
+            <button class="search_btn"></button>
+          </div>
           <i id="del_search" class="fa-solid fa-xmark"></i>
         </form>
       </header>
