@@ -1,5 +1,11 @@
+import { search } from "../functions/search.js";
+import { verifInput } from "../functions/verifInput.js";
+
 // Extraction de toutes les données aux filtres, puis on renvoie les éléments HTML relatifs aux différents filtres
 export function filters(recipes) {
+  const MainSearchBar = document.getElementById("search_bar");
+  const filterCtn = document.getElementById("filter_ctn");
+
   // Extraction de tous les ingrédients de recipes
   function getAllIng() {
     let allIng = []; // array avec tous les ingrédients
@@ -90,6 +96,9 @@ export function filters(recipes) {
     scroll.appendChild(optionList);
     filter.appendChild(scroll);
 
+    // Ajout événement pour suppression des tags
+    ajoutTagEvent(selectList);
+
     // Ajout de l'évènement click on chevron pour étendre ou réduire les filtres
     chevron.addEventListener("click", (e) =>
       extandFilter(e, filter, searchBar)
@@ -99,16 +108,16 @@ export function filters(recipes) {
     filter.setAttribute("tabIndex", "0"); // Obligatoire pour l'évènement
     input.setAttribute("tabIndex", "0");
     filter.addEventListener("blur", () => filterOnBlur());
-    input.addEventListener("blur", () => filterOnBlur());
+
     function filterOnBlur() {
+      chevron.className = "fa-solid fa-chevron-down";
+      filter.style.height = "22px";
+      searchBar.style.opacity = "0";
       input.addEventListener("focus", () => {
         chevron.className = "fa-solid fa-chevron-up";
         filter.style.height = "auto";
         searchBar.style.opacity = "1";
       });
-      chevron.className = "fa-solid fa-chevron-down";
-      filter.style.height = "22px";
-      searchBar.style.opacity = "0";
     }
 
     // Ajout de la fonction effacer dans l'input
@@ -119,12 +128,17 @@ export function filters(recipes) {
 
     // Evènement à chaque fois qu'on change qq chose dans input, ou qu'on clique sur la loupe
     // On met à jour la liste de proposition
+
     input.addEventListener("input", () => {
-      majList(input.value, list, optionList, erase, selectList);
+      if (verifInput(input.value)) {
+        majList(input.value, list, optionList, erase, selectList);
+      }
     });
     searchBar.addEventListener("submit", (e) => {
       e.preventDefault();
-      majList(input.value, list, optionList, erase, selectList);
+      if (verifInput(input.value)) {
+        majList(input.value, list, optionList, erase, selectList);
+      }
     });
 
     return filter;
@@ -179,12 +193,21 @@ export function filters(recipes) {
 
   // Création de la liste dans chaque filtre
   function creationList(list, optionList, selectList) {
+    const tagCtn = document.getElementById("tag_ctn");
+
     list.forEach((elt) => {
       const li = document.createElement("li");
       li.textContent = elt;
       optionList.appendChild(li);
 
-      // Chaque élément sélectionné doit être répertorié pour la recherche
+      // S'il existe des tags déjà présents, il faut les recréer en tant que sélection
+      tagCtn.childNodes.forEach((tagElt) => {
+        if (tagElt.textContent == elt) {
+          selectionCreation(elt);
+        }
+      });
+
+      // Chaque élément sélectionné doit être répertorié pour la recherche => Ajout dans sélection et tags donc
       li.addEventListener("click", () => {
         // On vérifie d'abord si l'élément n'existe pas déjà
         let bool = true;
@@ -194,39 +217,79 @@ export function filters(recipes) {
           }
         });
         if (bool) {
-          const liSelect = document.createElement("li");
-          const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
-          del.className = "fa-solid fa-circle-xmark";
-          liSelect.textContent = li.textContent;
-          liSelect.appendChild(del);
-          selectList.appendChild(liSelect);
-
-          // On ajoute également l'élément dans la section tag
-          const tagCtn = document.getElementById("tag_ctn");
-          const tag = document.createElement("div");
-          const delTag = document.createElement("i");
-          tag.className = "tag";
-          delTag.className = "fa-solid fa-xmark";
-          tag.innerHTML = li.textContent;
-          tag.appendChild(delTag);
-          tagCtn.appendChild(tag);
-
-          // Evènement suppression de l'élément si on clique sur le bouton supprimer
-          del.addEventListener("click", () => {
-            delSelect();
-          });
-
-          delTag.addEventListener("click", () => {
-            delSelect();
-          });
-
-          function delSelect() {
-            selectList.removeChild(liSelect);
-            tagCtn.removeChild(tag);
+          selectionCreation(li.textContent);
+          tagCreation(li.textContent);
+          // Maj des éléments à afficher selon la selection
+          if (verifInput(MainSearchBar.value)) {
+            search(MainSearchBar.value, filterCtn);
           }
         }
       });
+      function tagCreation(name) {
+        const tag = document.createElement("div");
+        const delTag = document.createElement("i");
+        tag.className = "tag";
+        delTag.className = "fa-solid fa-xmark";
+        tag.innerHTML = name;
+        tag.appendChild(delTag);
+        tagCtn.appendChild(tag);
+
+        return tag;
+      }
+
+      function selectionCreation(name) {
+        const liSelect = document.createElement("li");
+        const del = document.createElement("i"); // On rajoute également un bouton pour enlever la sélection au besoin
+        del.className = "fa-solid fa-circle-xmark";
+        liSelect.textContent = name;
+        liSelect.appendChild(del);
+        selectList.appendChild(liSelect);
+
+        /*// On l'ajoute aussi à tag, et on le fait ici car des selection peuvent être créées à partir de tags
+        tag.childNodes[1].addEventListener("click", (e) => {
+          delSelect(e, liSelect, tag);
+        });*/
+      }
     });
+  }
+
+  // Création des événements liés au bouton suppression de tag
+  function ajoutTagEvent(list) {
+    const tagCtn = document.getElementById("tag_ctn");
+    list.childNodes.forEach((selection) => {
+      tagCtn.childNodes.forEach((tag) => {
+        if (selection.textContent == tag.textContent) {
+          // Evènement suppression de l'élément si on clique sur le bouton supprimer
+
+          // Clonage et remplacement de tag pour virer tous les event listener
+          const tagClone = tag.cloneNode(true);
+          tag.parentNode.replaceChild(tagClone, tag);
+
+          // => Explication
+          // tag et selection sont bien en lien quand ils sont créés, mais à chaqu màj du filtre, on supprime tout et recrée tout
+          // il y a donc un nouveau selection, le lien est cassé, ou plutôt, il existe toujours, mais avec un élément dont le parent est null
+          // On reliait les éléments entre eux une nouvelle fois ensuite, mais le tag était alors en lien avec 2 éléments, l'ancien et le nouveau
+          // La fonction se lancait alors 2 fois
+          // Pour y remédier, on supprime les events avant de remettre les bons
+          // Et pour ce faire, le moyen le plus simple est cloner l'élément, et de remplacer l'ancien
+          // Les events ne sont pas copiés, on peut créer les nouveaux tranquillement
+
+          tagClone.childNodes[1].addEventListener("click", () => {
+            delSelect(selection, tagClone);
+          });
+          selection.childNodes[1].addEventListener("click", () => {
+            delSelect(selection, tagClone);
+          });
+        }
+      });
+    });
+  }
+
+  function delSelect(selection, tag) {
+    //console.log("toto");
+    selection.parentNode.removeChild(selection);
+    tag.parentNode.removeChild(tag);
+    search(MainSearchBar.value, filterCtn);
   }
 
   return { getAllIng, getAllApp, getAllUst, createFilter };

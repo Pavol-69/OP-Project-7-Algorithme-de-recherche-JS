@@ -58,7 +58,7 @@ header .shadow {
   object-fit: cover;
 }
 
-.search_ctn {
+#search_ctn {
   /*Position*/
   position: absolute;
   top: 245px;
@@ -73,7 +73,7 @@ header .shadow {
   gap: 40px;
 }
 
-.search_ctn label {
+#search_ctn label {
   /*Dimensions*/
 
   /*Texte*/
@@ -84,7 +84,7 @@ header .shadow {
   text-align: center;
 }
 
-.search_ctn input {
+#search_ctn input {
   /*Position*/
   padding-left: 35px;
 
@@ -101,7 +101,7 @@ header .shadow {
   font-weight: 400;
 }
 
-.search_ctn .search_btn {
+#search_ctn .search_btn {
   /*Position*/
   position: absolute;
   right: 10px;
@@ -133,7 +133,7 @@ header .shadow {
   color: var(--blk);
 }
 
-.search_ctn .loupe_ctn {
+#search_ctn .loupe_ctn {
   /*Dimensions*/
   height: 28px;
   width: 28px;
@@ -148,7 +148,7 @@ header .shadow {
   cursor: pointer;
 }
 
-.search_ctn .fa-xmark {
+#search_ctn .fa-xmark {
   /*Position*/
   bottom: 25px;
   right: 80px;
@@ -164,12 +164,12 @@ header .shadow {
     height: 450px;
   }
 
-  .search_ctn {
+  #search_ctn {
     /*Position*/
     top: 180px;
   }
 
-  .search_ctn label {
+  #search_ctn label {
     /*Texte*/
     font-size: 30px;
   }
@@ -200,7 +200,7 @@ header .shadow {
     height: 25px;
   }
 
-  .search_ctn {
+  #search_ctn {
     /*Position*/
     top: 100px;
 
@@ -211,12 +211,12 @@ header .shadow {
     gap: 20px;
   }
 
-  .search_ctn label {
+  #search_ctn label {
     /*Texte*/
     font-size: 23px;
   }
 
-  .search_ctn input {
+  #search_ctn input {
     /*Dimensions*/
     height: 50px;
     padding-left: 20px;
@@ -225,12 +225,12 @@ header .shadow {
     font-size: 13px;
   }
 
-  .search_ctn input::placeholder {
+  #search_ctn input::placeholder {
     /*Texte*/
     content: "toto";
   }
 
-  .search_ctn .search_btn {
+  #search_ctn .search_btn {
     /*Position*/
     right: 6px;
     bottom: 6px;
@@ -240,7 +240,7 @@ header .shadow {
     width: 40px;
   }
 
-  .search_ctn .fa-xmark {
+  #search_ctn .fa-xmark {
     /*Position*/
     bottom: 15px;
     right: 60px;
