@@ -1,11 +1,5 @@
-import { displaySearch } from "../functions/search.js";
-import { verifInput } from "../functions/verifInput.js";
-
 // Extraction de toutes les données aux filtres, puis on renvoie les éléments HTML relatifs aux différents filtres
 export function filters(recipes) {
-  const MainSearchBar = document.getElementById("search_bar");
-  const filterCtn = document.getElementById("filter_ctn");
-
   // Extraction de tous les ingrédients de recipes
   function getAllIng() {
     let allIng = []; // array avec tous les ingrédients
@@ -130,24 +124,12 @@ export function filters(recipes) {
     // On met à jour la liste de proposition
 
     input.addEventListener("input", () => {
-      majList(
-        verifInput(input.value, input),
-        list,
-        optionList,
-        erase,
-        selectList
-      );
+      majList(input.value, list, optionList, erase, selectList);
     });
     searchBar.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      majList(
-        verifInput(input.value, input),
-        list,
-        optionList,
-        erase,
-        selectList
-      );
+      majList(input.value, list, optionList, erase, selectList);
     });
 
     return filter;
@@ -229,12 +211,6 @@ export function filters(recipes) {
         if (bool) {
           selectionCreation(li.textContent);
           tagCreation(li.textContent);
-          // Maj des éléments à afficher selon la selection
-
-          displaySearch(
-            verifInput(MainSearchBar.value, MainSearchBar),
-            filterCtn
-          );
         }
       });
       function tagCreation(name) {
@@ -302,7 +278,6 @@ export function filters(recipes) {
     //console.log("toto");
     selection.parentNode.removeChild(selection);
     tag.parentNode.removeChild(tag);
-    displaySearch(MainSearchBar.value, filterCtn);
   }
 
   return { getAllIng, getAllApp, getAllUst, createFilter };
